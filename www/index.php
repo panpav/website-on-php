@@ -19,6 +19,12 @@ $controllerName = filter_input(INPUT_GET, 'controller') ?
 // определяем с какой функцией будем работать
 $actionName = (isset($_GET['action']) ? $_GET['action'] : 'index');
 
+// если в сессии есть данные об авторизованном пользователе, то
+// передаем их в шаблон
+if(isset($_SESSION['user'])){
+    $smarty->assign('arUser', $_SESSION['user']);
+}
+
 // инициализируем переменную шаблонизатора количества элементов в корзине
 $smarty->assign('cartCntItems', count($_SESSION['cart']));
 

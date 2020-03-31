@@ -99,7 +99,7 @@ function registerNewUser(){
                //<
                
                //> страница заказа
-               //$('#loginBox').hide();
+               $('#loginBox').hide();
                //$('#btnSaveOrder').show();
                //<
            } else {
@@ -143,6 +143,54 @@ function login(){
                 $('#userLink').html(data['displayName']);
                 $('#userBox').show();
                 
+            } else {
+                alert(data['message']);
+            }
+        }
+    });
+}
+
+/**
+ * Показывать или прятать форму регистрации
+ * 
+ */
+function showRegisterBox(){
+    if( $('#registerBoxHidden').css('display') != 'block'){
+        $('#registerBoxHidden').show();
+    } else {
+        $('#registerBoxHidden').hide();
+    }
+}
+
+/**
+ * Обновление данных пользователя
+ * 
+ */
+function updateUserData(){
+    console.log("js - updateUserData()");
+    var name = $('#newName').val();
+    var phone = $('#newPhone').val();
+    var address = $('#newAddress').val();
+    var pwd1 = $('#newPwd1').val();
+    var pwd2 = $('#newPwd2').val();
+    var curPwd = $('#curPwd').val();
+    
+    var postData = {name: name,
+                    phone: phone,
+                    address: address,
+                    pwd1: pwd1,
+                    pwd2: pwd2,
+                    curPwd: curPwd};
+    
+    $.ajax({
+        type: 'POST',
+        url: "/user/update/",
+        data: postData,
+        dataType: 'json',
+        success: function(data){
+            if(data['success']){
+                $('#userLink').html(data['userName']);
+                alert(data['message']);
             } else {
                 alert(data['message']);
             }
