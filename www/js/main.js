@@ -143,6 +143,15 @@ function login(){
                 $('#userLink').html(data['displayName']);
                 $('#userBox').show();
                 
+                //> заполняем поля на странице заказа
+                // Ролик 5.6, 8-я минута; Доработать данный блок кода
+                $('#name').val(data['name']);
+                $('#phone').val(data['phone']);
+                $('#address').val(data['address']);
+                //<
+                
+                $('#btnSaveOrder').show();
+                
             } else {
                 alert(data['message']);
             }
